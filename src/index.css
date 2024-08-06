@@ -1,0 +1,131 @@
+body {
+    background: linear-gradient(to right, #6a1b9a, #ff5722);
+}
+
+.to-do-list {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    margin-top: 100px;
+}
+
+.card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.39);
+    padding: 20px;
+    max-width: 900px;
+    margin: auto;
+}
+
+h1 {
+    font-size: 4rem;
+    color: #6a1b9a;
+    text-transform: uppercase;
+}
+
+button {
+    font-size: 1.7rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.10s ease;
+}
+
+.add-button {
+    background-color: #6a1b9a;
+}
+
+.add-button:hover {
+    background-color: #ff5722;
+}
+
+.delete-button {
+    background-color: #6a1b9a;
+}
+
+.delete-button:hover {
+    background-color: #ff5722;
+}
+
+.done-button {
+    background-color: #6a1b9a;
+}
+
+.done-button:hover {
+    background-color: #ff5722;
+}
+
+.edit-button {
+    background-color: #6a1b9a;
+}
+
+.edit-button:hover {
+    background-color: #ff5722;
+}
+
+input[type="text"], input[type="date"], input[type="time"] {
+    font-size: 1.6rem;
+    padding: 10px;
+    border: 2px solid #6a1b9a;
+    border-radius: 5px;
+    color: #f8774f;
+    margin-right: 10px;
+    height: 50px;
+    box-sizing: border-box;
+    cursor: pointer;
+} 
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(33%) sepia(100%) saturate(1000%) hue-rotate(0deg) brightness(95%) contrast(95%);
+}
+
+input::placeholder {
+    color: #f8774f;
+}
+
+input:focus {
+    color: #ff5722;
+    outline: none;
+}
+
+ol {
+    padding: 0;
+}
+
+li {
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 15px;
+    background-color: white;
+    margin-bottom: 10px;
+    border: 3px solid #6a1b9a;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.text {
+    flex: 1;
+    color: #ff5722;
+}
+
+.text.done {
+    text-decoration: line-through;
+    color: #aaa;
+}
+
+.delete-button, .edit-button, .done-button {
+    padding: 8px 12px;
+    font-size: 1.4rem;
+    margin-left: 10px;
+}
+
+.error-message {
+    color: #d32f2f;
+    font-size: 1.4rem;
+    margin: 10px 0;
+}
