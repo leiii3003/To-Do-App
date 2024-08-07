@@ -104,7 +104,6 @@ function ToDoList() {
         setNewTask(taskToEdit.text);
         setNewDate(taskToEdit.date);
         setNewTime(taskToEdit.time);
-        // Temporarily remove the task from the list
         const updatedTasks = tasks.filter((_, i) => i !== index);
         setTasks(updatedTasks);
     }
