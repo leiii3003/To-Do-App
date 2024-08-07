@@ -42,6 +42,26 @@ button {
     background-color: #ff5722;
 }
 
+.toggle-all-button {
+    background-color: #6a1b9a;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.toggle-all-button:hover {
+    background-color: #ff5722;
+}
+
+.delete-all-button {
+    background-color: #6a1b9a;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.delete-all-button:hover {
+    background-color: #ff5722;
+}
+
 .delete-button {
     background-color: #6a1b9a;
 }
@@ -71,7 +91,7 @@ input[type="text"], input[type="date"], input[type="time"] {
     padding: 10px;
     border: 2px solid #6a1b9a;
     border-radius: 5px;
-    color: #f8774f;
+    color: gray;
     margin-right: 10px;
     height: 50px;
     box-sizing: border-box;
@@ -84,11 +104,11 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 }
 
 input::placeholder {
-    color: #f8774f;
+    color: gray;
 }
 
 input:focus {
-    color: #ff5722;
+    color: darkgray;
     outline: none;
 }
 

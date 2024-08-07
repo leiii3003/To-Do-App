@@ -17,6 +17,10 @@ function ToDoList() {
     const [newDate, setNewDate] = useState('');
     const [newTime, setNewTime] = useState('');
     const [error, setError] = useState('');
+    const [allDone, setAllDone] = useState(() => {
+        const savedAllDone = localStorage.getItem('allDone');
+        return savedAllDone ? JSON.parse(savedAllDone) : false;
+    });
     const taskInputRef = useRef(null);
     const dateInputRef = useRef(null);
     const timeInputRef = useRef(null);
@@ -32,6 +36,10 @@ function ToDoList() {
     useEffect(() => {
         localStorage.setItem('tasks', JSON.stringify(tasks));
     }, [tasks]);
+
+    useEffect(() => {
+        localStorage.setItem('allDone', JSON.stringify(allDone));
+    }, [allDone]);
 
     function handleInputChange(event) {
         setNewTask(event.target.value);
@@ -51,21 +59,21 @@ function ToDoList() {
             alert('Please fill in all fields');
             return;
         }
-    
+
         const currentDateTime = new Date();
         const selectedDate = new Date(newDate);
         const selectedDateTime = new Date(`${newDate}T${newTime}`);
-    
+
         if (selectedDate < currentDateTime.setHours(0, 0, 0, 0)) {
             setError('The selected date has already passed.');
             return;
         }
-    
+
         if (selectedDate.toDateString() === currentDateTime.toDateString() && selectedDateTime < currentDateTime) {
             setError('The selected time has already passed.');
             return;
         }
-    
+
         setError('');
         const newTaskObject = {
             text: newTask,
@@ -77,7 +85,7 @@ function ToDoList() {
         setNewTask('');
         setNewDate('');
         setNewTime('');
-    }    
+    }
 
     function deleteTask(index) {
         const updatedTasks = tasks.filter((_, i) => i !== index);
@@ -110,6 +118,22 @@ function ToDoList() {
         ref.current.showPicker();
     }
 
+    function toggleAllDone() {
+        if (tasks.length === 0) {
+            return;
+        }
+        const updatedTasks = tasks.map(task => ({ ...task, done: !allDone }));
+        setTasks(updatedTasks);
+        setAllDone(!allDone);
+    }
+
+    function deleteAllTasks() {
+        if (window.confirm('Are you sure you want to delete all tasks?')) {
+            setTasks([]);
+            setAllDone(false);
+        }
+    }
+
     return (
         <div className="to-do-list">
             <Card>
@@ -139,6 +163,12 @@ function ToDoList() {
                     />
                     <button className="add-button" onClick={addTask}>
                         Add
+                    </button>
+                    <button className="toggle-all-button" onClick={toggleAllDone}>
+                        {allDone ? 'Undo All' : 'Mark All as Done'}
+                    </button>
+                    <button className="delete-all-button" onClick={deleteAllTasks}>
+                        Delete All
                     </button>
                 </div>
                 {error && <p className="error-message">{error}</p>}
