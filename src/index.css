@@ -5,7 +5,7 @@ body {
 .to-do-list {
     font-family: 'Arial', sans-serif;
     text-align: center;
-    margin-top: 100px;
+    margin-top: 50px;
 }
 
 .card {
@@ -15,6 +15,7 @@ body {
     padding: 20px;
     max-width: 900px;
     margin: auto;
+    margin-top: 40px;
 }
 
 h1 {
@@ -125,12 +126,16 @@ li {
     border: 3px solid #6a1b9a;
     border-radius: 5px;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
 }
 
 .text {
-    flex: 1;
+    width: 100%;
     color: #ff5722;
+    word-wrap: break-word;
+    margin-bottom: 10px;
 }
 
 .text.done {
@@ -138,10 +143,17 @@ li {
     color: #aaa;
 }
 
+.button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
 .delete-button, .edit-button, .done-button {
     padding: 8px 12px;
     font-size: 1.4rem;
-    margin-left: 10px;
+    margin: 0 5px;
 }
 
 .error-message {

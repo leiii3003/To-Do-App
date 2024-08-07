@@ -88,8 +88,10 @@ function ToDoList() {
     }
 
     function deleteTask(index) {
-        const updatedTasks = tasks.filter((_, i) => i !== index);
-        setTasks(updatedTasks);
+        if (window.confirm('Are you sure you want to delete this task?')) {
+            const updatedTasks = tasks.filter((_, i) => i !== index);
+            setTasks(updatedTasks);
+        }
     }
 
     function markAsDone(index) {
@@ -102,7 +104,9 @@ function ToDoList() {
         setNewTask(taskToEdit.text);
         setNewDate(taskToEdit.date);
         setNewTime(taskToEdit.time);
-        deleteTask(index);
+        // Temporarily remove the task from the list
+        const updatedTasks = tasks.filter((_, i) => i !== index);
+        setTasks(updatedTasks);
     }
 
     function formatTime(timeString) {
@@ -135,8 +139,8 @@ function ToDoList() {
     }
 
     return (
-        <div className="to-do-list">
-            <Card>
+        <Card>
+            <div className="to-do-list">
                 <h1>To-Do List</h1>
                 <div>
                     <input
@@ -161,37 +165,31 @@ function ToDoList() {
                         onChange={handleTimeChange}
                         onFocus={(e) => handleFocus(e, timeInputRef)}
                     />
-                    <button className="add-button" onClick={addTask}>
-                        Add
-                    </button>
-                    <button className="toggle-all-button" onClick={toggleAllDone}>
-                        {allDone ? 'Undo All' : 'Mark All as Done'}
-                    </button>
-                    <button className="delete-all-button" onClick={deleteAllTasks}>
-                        Delete All
-                    </button>
+                    <button className="add-button" onClick={addTask}>Add</button>
                 </div>
                 {error && <p className="error-message">{error}</p>}
+                <div>
+                    <button className="toggle-all-button" onClick={toggleAllDone}>
+                        {allDone ? 'Unmark All' : 'Mark All as Done'}
+                    </button>
+                    <button className="delete-all-button" onClick={deleteAllTasks}>Delete All</button>
+                </div>
                 <ol>
                     {tasks.map((task, index) => (
                         <li key={index}>
-                            <span className={`text ${task.done ? 'done' : ''}`}>
-                                {task.text} - {task.date} - {formatTime(task.time)}
-                            </span>
-                            <button className="done-button" onClick={() => markAsDone(index)}>
-                                ✔️
-                            </button>
-                            <button className="edit-button" onClick={() => editTask(index)}>
-                                ✏️
-                            </button>
-                            <button className="delete-button" onClick={() => deleteTask(index)}>
-                                🗑️
-                            </button>
+                            <span className={`text ${task.done ? 'done' : ''}`}>{task.text} - {task.date} - {formatTime(task.time)}</span>
+                            <div className="button-container">
+                                <button className="done-button" onClick={() => markAsDone(index)}>
+                                    {task.done ? '🔄' : '✔️'}
+                                </button>
+                                <button className="edit-button" onClick={() => editTask(index)}>✏️</button>
+                                <button className="delete-button" onClick={() => deleteTask(index)}>🗑️</button>
+                            </div>
                         </li>
                     ))}
                 </ol>
-            </Card>
-        </div>
+            </div>
+        </Card>
     );
 }
 
